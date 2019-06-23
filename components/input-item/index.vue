@@ -114,7 +114,8 @@
   </md-field-item>
 </template>
 
-<script>import Icon from '../icon'
+<script>
+import Icon from '../icon'
 import FieldItem from '../field-item'
 import NumberKeyboard from '../number-keyboard'
 import {getCursorsPosition, setCursorsPosition} from './cursor'
@@ -298,8 +299,8 @@ export default {
     inputValue(val) {
       this.inputBindValue = val
       val = this.isFormative ? this.$_trimValue(val) : val
-      this.$emit('input', val)
-      this.$emit('change', this.name, val)
+      this.$emit('input', this.$_toSourceType(val))
+      this.$emit('change', this.name, this.$_toSourceType(val))
     },
     isInputFocus(val) {
       if (!this.isVirtualKeyboard || !this.inputNumberKeyboard) {
@@ -332,6 +333,14 @@ export default {
 
   methods: {
     // MARK: private methods
+    $_toSourceType(val){
+      let inputType = this.type || 'text'
+      if (inputType === 'digit') {
+        return parseInt(val)
+      } else {
+        return val
+      }
+    },
     $_formateValue(curValue, curPos = 0) {
       const type = this.type
       const name = this.name
@@ -468,7 +477,7 @@ export default {
     $_onKeyup(event) {
       this.$emit('keyup', this.name, event)
       if (+event.keyCode === 13 || +event.keyCode === 108) {
-        this.$emit('confirm', this.name, this.inputValue)
+        this.$emit('confirm', this.name, this.$_toSourceType(this.inputValue))
       }
     },
     $_onKeydown(event) {
@@ -506,7 +515,7 @@ export default {
       this.inputValue = this.$_formateValue(inputValue.substring(0, inputValue.length - 1)).value
     },
     $_onNumberKeyBoardConfirm() {
-      this.$emit('confirm', this.name, this.inputValue)
+      this.$emit('confirm', this.name, this.$_toSourceType(this.inputValue))
     },
 
     // MARK: public methods
@@ -529,11 +538,12 @@ export default {
       }
     },
     getValue() {
-      return this.inputValue
+      return this.$_toSourceType(this.inputValue)
     },
   },
 }
-</script>
+
+</script>
 
 <style lang="stylus">
 .md-input-item
