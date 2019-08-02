@@ -387,7 +387,7 @@ export default {
 
       if (this.mouseMoveTime) {
         const timeGap = event.timeStamp - this.mouseMoveTime
-        if (timeGap >= 20) {
+        if (timeGap >= 100) {
           this.$_onColumnTouchEnd(event, index, isMouse)
         }
       }
