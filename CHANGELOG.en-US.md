@@ -3,6 +3,67 @@ title: Change Log
 toc: hidden
 ---
 
+### 2.4.0
+
+`2019-07-29`
+
+- Design
+  - 🍭Financial design specification update, the title bar `border-radius` of `Popup` based components changed from `8px` to `40px` (Large-Radius pattern), `border-radius` of `Dialog` changed from `8px` to `12px` 
+
+  ![Design](https://pt-starimg.didistatic.com/static/starimg/img/FLXmXRBcDX1564369346467.jpg)
+
+- Feature
+  - `PopupTitleBar` adds following Props:
+    - `large-radius` for supporting Large-Radius pattern
+    - `only-close`, used to quickly set a single close button
+    - `title-align`, used to set the position of title and description(left/right/center)
+  - `Picker`, `DatePicker`, `TabPicker`, `Selector`, `Cashier` add Prop `large-radius` for supporting Large-Radius pattern
+  - `Selector` adds Prop `hide-title-bar`, used to support hiding the title bar in no confirmation mode, and adds slots `header`，`footer`
+  - `Button` adds Prop `loading`, used to set the loading status
+  - `Dialog` Prop `btns` adds two status settings `disabled`/`loading`, and passing back the `btn` instance in `handler`[#500](https://github.com/didi/mand-mobile/issues/500)
+
+    ```javascript
+    export default {
+      data () {
+        return {
+          btns: [{
+            text: 'Search',
+            handler: this.btnHandler
+          }]
+        }
+      },
+      methods: {
+        btnHandler (btn) {
+          this.$set(btn, 'loading', true)
+          this.$set(btn, 'text', 'Searching')
+        },
+      }
+    }
+    ```
+
+- Fix
+  - fix `InputItem` and `Stepper` with default values will trigger the `change` event when the component is initialized[#495](https://github.com/didi/mand-mobile/issues/495)
+  - `Amount` capital mode is compatible with negative numbers[#510](https://github.com/didi/mand-mobile/issues/510)
+
+### 2.3.3
+
+`2019-07-18`
+
+- Fix
+  - Fix compatibility issues when fixing `Toast` custom positions[#485](https://github.com/didi/mand-mobile/issues/485)
+  - Fix `TabPicker` when setting `default-value`, `TabBar` can't automatically select the last item[#488](https://github.com/didi/mand-mobile/issues/488)
+  - Fix `Selector` and `CheckList` click icons can't select current item[#491](https://github.com/didi/mand-mobile/issues/491)
+  - Fix this problem `Popup` can't cover `NoticeBar`[#492](https://github.com/didi/mand-mobile/issues/492)
+  - Fix partial `stylus` variable assignment error in `Stepper`
+
+### 2.3.2
+
+`2019-07-05`
+
+- Fix
+  - fix `Codebox` value could not be assigned when initializing
+  - fix the problem that the `NumberKeyboard` keys may be clicked incorrectly[#477](https://github.com/didi/mand-mobile/issues/477)
+
 ### 2.3.1
 
 `2019-06-22`

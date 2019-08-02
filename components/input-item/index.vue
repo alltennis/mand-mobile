@@ -114,8 +114,7 @@
   </md-field-item>
 </template>
 
-<script>
-import Icon from '../icon'
+<script>import Icon from '../icon'
 import FieldItem from '../field-item'
 import NumberKeyboard from '../number-keyboard'
 import {getCursorsPosition, setCursorsPosition} from './cursor'
@@ -299,8 +298,10 @@ export default {
     inputValue(val) {
       this.inputBindValue = val
       val = this.isFormative ? this.$_trimValue(val) : val
-      this.$emit('input', this.$_toSourceType(val))
-      this.$emit('change', this.name, this.$_toSourceType(val))
+      if (val !== this.value) {
+        this.$emit('input', this.$_toSourceType(val))
+        this.$emit('change', this.name, this.$_toSourceType(val))
+      }
     },
     isInputFocus(val) {
       if (!this.isVirtualKeyboard || !this.inputNumberKeyboard) {
@@ -333,7 +334,7 @@ export default {
 
   methods: {
     // MARK: private methods
-    $_toSourceType(val){
+    $_toSourceType(val) {
       let inputType = this.type || 'text'
       if (inputType === 'digit') {
         return parseInt(val)
@@ -542,8 +543,7 @@ export default {
     },
   },
 }
-
-</script>
+</script>
 
 <style lang="stylus">
 .md-input-item

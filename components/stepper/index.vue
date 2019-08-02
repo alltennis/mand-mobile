@@ -130,8 +130,10 @@ export default {
     currentNum(val, oldVal) {
       this.$_checkStatus()
 
-      this.$emit('input', val)
-      this.$emit('change', val)
+      if (val !== this.value) {
+        this.$emit('input', val)
+        this.$emit('change', val)
+      }
 
       const diff = val - oldVal
 
@@ -222,7 +224,7 @@ export default {
   width stepper-width-button
   height stepper-height
   background-color stepper-fill
-  border-radius 2px
+  border-radius stepper-radius-button
   &:after
     content ""
     position absolute
@@ -253,7 +255,7 @@ export default {
   height stepper-height
   padding 0 4px
   text-align center
-  border-radius stepper-radius-button
+  border-radius stepper-radius-input
   background-color stepper-fill
   input
     width 100%
@@ -266,5 +268,4 @@ export default {
     box-sizing border-box
     text-align center
     color stepper-color
-    border-radius stepper-radius-input
 </style>
