@@ -127,6 +127,7 @@ export default {
       isScrollInitialed: false,
       isScrolling: false,
       isMouseDown: false,
+      mouseMoveTime: 0,
     }
   },
 
@@ -363,6 +364,13 @@ export default {
       isMouse && (this.isMouseDown = true)
     },
     $_onColumnTouchMove(event, index, isMouse) {
+      if (isMouse && !this.isMouseDown) {
+        return
+      }
+      if (isMouse && !this.mouseMoveTime) {
+        this.mouseMoveTime = event.timeStamp
+      }
+
       const scroller = this.scrollers[index]
       const touches = isMouse ? [{pageX: event.pageX, pageY: event.pageY}] : event.touches
 
@@ -376,8 +384,16 @@ export default {
 
       scroller.doTouchMove(touches, event.timeStamp)
       isMouse && (this.isMouseDown = true)
+
+      if (this.mouseMoveTime) {
+        const timeGap = event.timeStamp - this.mouseMoveTime
+        if (timeGap >= 20) {
+          this.$_onColumnTouchEnd(event, index, isMouse)
+        }
+      }
     },
     $_onColumnTouchEnd(event, index, isMouse) {
+      this.mouseMoveTime = 0
       const scroller = this.scrollers[index]
 
       /* istanbul ignore if */
