@@ -161,7 +161,7 @@ export default {
     display flex
     float left
     height 100%
-    padding-top h-gap-md
+    padding-top v-gap-sl
     flex-direction column
     align-items center
     justify-content flex-start
@@ -187,7 +187,7 @@ export default {
       font-size popup-title-bar-font-size-title
       color popup-title-bar-color-title
     p.describe
-      margin-top h-gap-md
+      margin-top v-gap-sl
       font-size popup-title-bar-font-size-describe
       color popup-title-bar-color-describe
   .title-bar-left
