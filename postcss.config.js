@@ -13,12 +13,23 @@ module.exports = () => {
         reduceIdents: false,
       }]
     },
-    'autoprefixer': { browsers: browserslist }
+    'autoprefixer': { browsers: browserslist },
+    'postcss-px-to-viewport': {
+      viewportWidth: 375,
+      viewportHeight: 667,
+      unitPrecision: 5,
+      viewportUnit: 'vw',
+      selectorBlackList: [],
+      minPixelValue: 1,
+      mediaQuery: false
+    }
   }
 
+  /*
   if (process.env.NODE_ENV !== 'production' || process.env.BUILD_TYPE === 'example') {
     plugins['postcss-pxtorem'] = { rootValue: 100, minPixelValue: 2, propWhiteList: [] }
   }
+  */
 
   return {
     plugins
