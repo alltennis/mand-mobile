@@ -13,7 +13,7 @@ module.exports = () => {
         reduceIdents: false,
       }]
     },
-    'autoprefixer': { browsers: browserslist },
+    'autoprefixer': { overrideBrowserslist: browserslist },
     'postcss-px-to-viewport': {
       viewportWidth: 375,
       viewportHeight: 667,
