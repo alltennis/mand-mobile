@@ -224,5 +224,8 @@
   "browserslist": [
     "iOS >= 8",
     "Android > 4.0"
-  ]
+  ],
+  "dependencies": {
+    "postcss-px-to-viewport": "^1.1.1"
+  }
 }
