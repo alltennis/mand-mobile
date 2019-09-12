@@ -14,6 +14,12 @@ module.exports = () => {
       }]
     },
     'autoprefixer': { overrideBrowserslist: browserslist },
+    'postcss-pxtorem': {
+      rootValue: 10,
+      propWhiteList: [],
+      minPixelValue: 2
+    },
+    /*
     'postcss-px-to-viewport': {
       viewportWidth: 375,
       viewportHeight: 667,
@@ -23,6 +29,7 @@ module.exports = () => {
       minPixelValue: 1,
       mediaQuery: false
     }
+    */
   }
 
   /*
