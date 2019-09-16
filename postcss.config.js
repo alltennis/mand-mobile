@@ -15,7 +15,7 @@ module.exports = () => {
     },
     'autoprefixer': { overrideBrowserslist: browserslist },
     'postcss-pxtorem': {
-      rootValue: 10,
+      rootValue: 5,
       propWhiteList: [],
       minPixelValue: 2
     },
